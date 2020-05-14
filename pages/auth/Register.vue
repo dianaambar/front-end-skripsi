@@ -1,6 +1,6 @@
 <template>
 <div>
-	<v-form @submit.prevent="register">
+	<!--<v-form @submit.prevent="register">
 		<div>
 			<label>Nama Komunitas</label><br>
 			<input v-model="form.name" type="text" class="form-control" :class="{ 'is-invalid': errors.name}" placeholder="Nama Komunitas">	
@@ -41,7 +41,30 @@
 		<div>
 			<input type="submit" value="register" class="btn btn-default w-100">
 		</div>
-	</v-form>
+	</v-form>-->
+	<v-card class="card-regis" @submit.prevent="register">
+		<v-card-title>Register</v-card-title>
+		<v-form>
+			<v-text-field
+				v-model="form.name"
+				label="Nama Komunitas"
+				type="text"
+			></v-text-field>
+			<v-text-field
+				v-model="form.email"
+				label="Email"
+				type="email"
+			></v-text-field>
+			<v-text-field
+				v-model="form.password"
+				label="Password"
+				type="password"
+			></v-text-field>
+			<div>
+			<input type="submit" value="register" class="btn-regis">
+		</div>
+		</v-form>
+	</v-card>
 </div>
 	
 </template>
@@ -68,7 +91,7 @@ export default {
 		async register() {
 			await this.$axios.$post("register", this.form);
 
-			this.$router.push({ name: 'Login'})
+			this.$router.push('/auth/Login')
 		}
 	}
 
@@ -91,3 +114,24 @@ export default {
 	
 }
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+.card-regis{
+	margin-top: 10rem;
+	margin-left: 20rem;
+	padding: 2rem;
+	max-width: 50rem;
+	font-family: 'Rubik', sans-serif;
+}
+
+.btn-regis{
+	background-color: lightblue;
+	padding: 0.5rem;
+	width: 10rem;
+	border-radius: 1rem;
+	margin-left: 17rem;
+
+	font-family: 'Rubik', sans-serif;
+}
+</style>

@@ -19,7 +19,7 @@
 
 	 <v-card class="card-donasi">
       <v-card-title>
-        Donasi
+        Donasi Diterima
         <v-spacer></v-spacer>
         <v-text-field
           label="Search"
@@ -44,7 +44,7 @@
         <template #expanded-item="{items,item}">
 			<td :colspan="headers.length">
 				<!--<v-card class="card-table">-->
-					<v-row class="detail-donasi" align="center">
+					<v-row class="detail-donasi">
 						<v-col cols="6">
 						<img class="img-makanan" :src="item.foto_donasi"/>
 						</v-col>
@@ -83,15 +83,18 @@
 									<p>{{new Date(item.tgl_kadaluwarsa).toLocaleString()}}</p>
 								</v-col>	
 							</v-row>
+								<!--<h5>Jenis Makanan:</h5>
+									<p>{{item.jenis_makanan}}</p>
+									<h5>Jumlah Porsi:</h5>
+									<p>{{item.jumlah_porsi}}</p>
+									<h5>Lokasi Penjemputan:</h5>
+									<p>{{item.lokasi_penjemputan}}</p>
+									<h5>Perkiraan Tanggal Kadaluwarsa:</h5>-->
+									<!--<p>{{item.tgl_kadaluwarsa}}</p>-->
 								
-						</v-col>
-					</v-row>
-					<v-row align="center" class="btn-acc">
-						<v-col>
-							<v-btn @click="updateDonasi(item.id)" class="my-2" color="#43A047">Terima</v-btn>
-						</v-col>
-						<v-col>
-							<v-btn color="#C62828">Tolak</v-btn>
+								
+							
+							<!--<p>{{item.jenis_makanan}}</p>-->
 						</v-col>
 					</v-row>
 				<!--</v-card>-->
@@ -110,7 +113,7 @@
 <script>
 import axios from 'axios';
 export default {
-	name: "TableDonasi",
+	name: "TableDonasiAcc",
 
 	data(){
 		return{
@@ -137,18 +140,12 @@ export default {
 	},
 	methods:{
 		async loadData(){
-				const isis = await this.$axios.$get("donasi")
-				this.items = isis.donasi
+				const isis = await this.$axios.$get("donasi/accdonasi")
+				this.items = isis.accdonasi
 				//console.log("bisa cuy")
 				//console.log(isis.donasi[0].nama_makanan)
 		},
-		//async updateDonasi(id){
-		//	await window.axios.post(`donasi/updateDonasi/${id}`);
-		//}
-		async updateDonasi(id){
-			await this.$axios.$post(`donasi/updateDonasi/${id}`);
-			console.log("method ini kepanggil");
-		}
+		
 	}
 }
 </script>
@@ -170,16 +167,9 @@ export default {
 	max-width: 3rem;
 }
 
-.detail-donasi{
-}
 
 .txt-detail-donasi{
-	/*margin-top: 1rem;*/
-	/*padding: 1rem;*/
 	padding-left: 2rem;
-}
-
-.btn-acc{
-	align-items: center;
+	/*justify-content: center;*/
 }
 </style>

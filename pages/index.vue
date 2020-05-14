@@ -29,6 +29,6 @@ export default {
 
 <style scoped>
 .my-2{
-	padding: 20rem 15rem;
+	padding: 20rem 10rem;
 }
 </style>

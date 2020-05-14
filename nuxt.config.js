@@ -15,7 +15,8 @@ module.exports =  {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+	  { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+	  { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik&display=swap' }
     ]
   },
   /*
@@ -93,7 +94,8 @@ module.exports =  {
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+	customVariables: ['~/assets/variables.scss'],
+	treeShake: true,
     theme: {
       dark: true,
       themes: {

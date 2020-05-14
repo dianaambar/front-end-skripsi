@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<!--<v-app-bar>-->
    <v-container>
    <!--<v-card
       height="400"
@@ -46,6 +47,7 @@
       </v-navigation-drawer>
     <!--</v-card>-->
   </v-container>
+  <!--</v-app-bar>-->
   </div>
 </template>
 
@@ -66,16 +68,20 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 .judul{
 	padding: 1rem;
 }
 
 .subjudul{
 	margin-left: 1rem;
+	font-family: 'Rubik', sans-serif;
 }
 
 
 .subcontent{
 	margin-left: 1rem;
+
+	font-family: 'Rubik', sans-serif;
 }
 </style>
