@@ -29,21 +29,23 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table
-        v-model="selected"
         :headers="headers"
         :items="items"
         :search="search" 
 		show-expand
+		@click:row="goToDonasi"
       >
 	  <template v-slot:item.tgl_pengajuan="{item}">
-		  <span>{{new Date(item.tgl_pengajuan).toLocaleString()}}</span>
+		  <!--<td @click="goToDonasi(item.id)">-->
+		  	<span>{{new Date(item.tgl_pengajuan).toLocaleString()}}</span>
+		  <!--</td>-->
 	  </template>
 	  <template v-slot:item.tgl_kadaluwarsa="{item}">
 		  <span>{{new Date(item.tgl_kadaluwarsa).toLocaleString()}}</span>
 	  </template>
+	  
         <template #expanded-item="{items,item}">
 			<td :colspan="headers.length">
-				<!--<v-card class="card-table">-->
 					<v-row class="detail-donasi">
 						<v-col cols="6">
 						<img class="img-makanan" :src="item.foto_donasi"/>
@@ -83,23 +85,16 @@
 									<p>{{new Date(item.tgl_kadaluwarsa).toLocaleString()}}</p>
 								</v-col>	
 							</v-row>
-								<!--<h5>Jenis Makanan:</h5>
-									<p>{{item.jenis_makanan}}</p>
-									<h5>Jumlah Porsi:</h5>
-									<p>{{item.jumlah_porsi}}</p>
-									<h5>Lokasi Penjemputan:</h5>
-									<p>{{item.lokasi_penjemputan}}</p>
-									<h5>Perkiraan Tanggal Kadaluwarsa:</h5>-->
-									<!--<p>{{item.tgl_kadaluwarsa}}</p>-->
-								
-								
-							
-							<!--<p>{{item.jenis_makanan}}</p>-->
 						</v-col>
 					</v-row>
-				<!--</v-card>-->
+					
 			</td>
         </template>
+
+		<!--<template #item.jenis_makanan="{value, item}">
+			<nuxt-link :to="`/komunitas/${item.id}`">
+			</nuxt-link>
+		</template>-->
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
           Your search for "{{ search }}" found no results.
         </v-alert>
@@ -118,6 +113,9 @@ export default {
 	data(){
 		return{
 			search: "",
+			dialog: {
+				show: false
+			},
 			items: [],
 			foto: "/public/images/nasikotak.jpg",
 			selected:[],
@@ -145,6 +143,19 @@ export default {
 				//console.log("bisa cuy")
 				//console.log(isis.donasi[0].nama_makanan)
 		},
+
+		goToDonasi(item){
+			this.$router.push(`/komunitas/ddonasi`)
+		},
+
+		showDialog(item){
+			Object.assign(this.dialog, item)
+			this.dialog.show = true
+		},
+
+		closeDialog(){
+			this.dialog.show = false
+		}
 		
 	}
 }

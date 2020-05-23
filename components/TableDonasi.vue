@@ -31,7 +31,7 @@
       <v-data-table
         v-model="selected"
         :headers="headers"
-        :items="items"
+        :items="datadonasi"
         :search="search" 
 		show-expand
       >
@@ -41,7 +41,7 @@
 	  <template v-slot:item.tgl_kadaluwarsa="{item}">
 		  <span>{{new Date(item.tgl_kadaluwarsa).toLocaleString()}}</span>
 	  </template>
-        <template #expanded-item="{items,item}">
+        <template #expanded-item="{datadonasi,item}">
 			<td :colspan="headers.length">
 				<!--<v-card class="card-table">-->
 					<v-row class="detail-donasi" align="center">
@@ -102,7 +102,7 @@
         </v-alert>
       </v-data-table>
     </v-card>
-
+<!--<app-donasi datadonasi="datadonasi"> </app-donasi>-->
 </div>
 	
 </template>
@@ -115,7 +115,7 @@ export default {
 	data(){
 		return{
 			search: "",
-			items: [],
+			datadonasi: [],
 			foto: "/public/images/nasikotak.jpg",
 			selected:[],
 			headers: [
@@ -138,7 +138,7 @@ export default {
 	methods:{
 		async loadData(){
 				const isis = await this.$axios.$get("donasi")
-				this.items = isis.donasi
+				this.datadonasi = isis.donasi
 				//console.log("bisa cuy")
 				//console.log(isis.donasi[0].nama_makanan)
 		},
@@ -148,6 +148,7 @@ export default {
 		async updateDonasi(id){
 			await this.$axios.$post(`donasi/updateDonasi/${id}`);
 			console.log("method ini kepanggil");
+			window.location.reload(true)
 		}
 	}
 }
