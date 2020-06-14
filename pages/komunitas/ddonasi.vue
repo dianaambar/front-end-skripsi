@@ -1,6 +1,7 @@
 <template>
 	<div id="d-donasi">
-		<p> test </p>
+		<p> {{items}}</p>
+		<p>test</p>
 		<div v-for="dd in items" :key="dd.id">
 			<p>{{dd.jenis_makanan}}</p>
 		</div>

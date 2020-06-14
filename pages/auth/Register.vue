@@ -1,6 +1,6 @@
 <template>
-<div>
-	<!--<v-form @submit.prevent="register">
+  <div>
+    <!--<v-form @submit.prevent="register">
 		<div>
 			<label>Nama Komunitas</label><br>
 			<input v-model="form.name" type="text" class="form-control" :class="{ 'is-invalid': errors.name}" placeholder="Nama Komunitas">	
@@ -41,97 +41,86 @@
 		<div>
 			<input type="submit" value="register" class="btn btn-default w-100">
 		</div>
-	</v-form>-->
-	<v-card class="card-regis" @submit.prevent="register">
-		<v-card-title>Register</v-card-title>
-		<v-form>
-			<v-text-field
-				v-model="form.name"
-				label="Nama Komunitas"
-				type="text"
-			></v-text-field>
-			<v-text-field
-				v-model="form.email"
-				label="Email"
-				type="email"
-			></v-text-field>
-			<v-text-field
-				v-model="form.password"
-				label="Password"
-				type="password"
-			></v-text-field>
-			<div>
-			<input type="submit" value="register" class="btn-regis">
-		</div>
-		</v-form>
-	</v-card>
-</div>
-	
+    </v-form>-->
+    <v-card class="card-regis" @submit.prevent="register">
+      <v-card-title>Register</v-card-title>
+      <v-form>
+        <v-text-field v-model="form.name" label="Nama Komunitas" type="text"></v-text-field>
+        <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
+        <v-text-field v-model="form.password" label="Password" type="password"></v-text-field>
+        <v-text-field v-model="form.no_telp" label="No telp" type="text"></v-text-field>
+        <v-text-field v-model="form.alamat" label="Alamat" type="text"></v-text-field>
+        <v-text-field v-model="form.tgl_berdiri" label="Tanggal Berdiri" type="text"></v-text-field>
+        <v-text-field v-model="form.legalitas" label="Legalitas Komunitas" type="text"></v-text-field>
+        <v-text-field v-model="form.foto_komunitas" label="Foto Komunitas" type="text"></v-text-field>
+        <div>
+          <input type="submit" value="register" class="btn-regis" />
+        </div>
+      </v-form>
+    </v-card>
+  </div>
 </template>
 
 <script>
 export default {
-	data(){
-		return{
-			form: {
-				name: '',
-				email: '',
-				password: '',
-				tipe_user: 'komunitas',
-				//notelp: '',
-				//legalitas: '',
-				//tglBerdiri: '',
-				//jmlRelawan: '',
-				//alamat: '',
-				//foto: ''
-			}
-		}
-	},
-	methods: {
-		async register() {
-			await this.$axios.$post("register", this.form);
+  data() {
+    return {
+      form: {
+        name: "",
+        email: "",
+        password: "",
+        no_telp: "",
+        legalitas: "",
+        tgl_berdiri: "",
+        alamat: "",
+        foto_komunitas: ""
+      }
+    };
+  },
+  methods: {
+    async register() {
+      await this.$axios.$post("regiskomunitas", this.form);
 
-			this.$router.push('/auth/Login')
-		}
-	}
+      this.$router.push("/auth/Login");
+    }
+  }
 
-	//computed: {
-	//	nameErrors () {
-    //    const errors = []
-    //    if (!this.$v.name.$dirty) return errors
-    //    !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-    //    !this.$v.name.required && errors.push('Name is required.')
-    //    return errors
-    //  },
-    //  emailErrors () {
-    //    const errors = []
-    //    if (!this.$v.email.$dirty) return errors
-    //    !this.$v.email.email && errors.push('Must be valid e-mail')
-    //    !this.$v.email.required && errors.push('E-mail is required')
-    //    return errors
-	//  }
-	//}
-	
-}
+  //computed: {
+  //	nameErrors () {
+  //    const errors = []
+  //    if (!this.$v.name.$dirty) return errors
+  //    !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
+  //    !this.$v.name.required && errors.push('Name is required.')
+  //    return errors
+  //  },
+  //  emailErrors () {
+  //    const errors = []
+  //    if (!this.$v.email.$dirty) return errors
+  //    !this.$v.email.email && errors.push('Must be valid e-mail')
+  //    !this.$v.email.required && errors.push('E-mail is required')
+  //    return errors
+  //  }
+  //}
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-.card-regis{
-	margin-top: 10rem;
-	margin-left: 20rem;
-	padding: 2rem;
-	max-width: 50rem;
-	font-family: 'Rubik', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+.card-regis {
+  margin-top: 10rem;
+  margin-left: 20rem;
+  padding: 2rem;
+  max-width: 50rem;
+  font-family: "Rubik", sans-serif;
 }
 
-.btn-regis{
-	background-color: lightblue;
-	padding: 0.5rem;
-	width: 10rem;
-	border-radius: 1rem;
-	margin-left: 17rem;
+.btn-regis {
+  background-color: lightblue;
+  padding: 0.5rem;
+  width: 10rem;
+  border-radius: 1rem;
+  margin-left: 17rem;
 
-	font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 </style>

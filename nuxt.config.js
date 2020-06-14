@@ -45,10 +45,11 @@ module.exports =  {
 	  strategies: {
 		  local: {
 			  endpoints: {
-				  login: {url: 'auth/login', method: 'post', propertyName: 'token'},
-				  logout: { url: 'auth/logout', method: 'post' },
-        		  user: { url: '/user', method: 'get', propertyName: 'user' }
-			  }
+				  login: {url: 'login', method: 'post', propertyName: 'access_token'},
+				  user: {url: 'getuser', method: 'get', propertyName: 'user'}
+				//  logout: { url: 'auth/logout', method: 'post' },
+				//  refresh: { url: 'auth/refresh', method: 'get', propertyName: ''},
+			  },
 		  }
 	  },
 	  redirect: {

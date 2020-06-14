@@ -7,12 +7,7 @@
 			</v-col>
 			<v-col cols="10">
 			<v-row>
-				<v-col cols="6">
 					<TableDonasi/>
-				</v-col>
-				<v-col cols="6">
-					<TableDonasiAcc/>
-				</v-col>
 			</v-row>
 			</v-col>
 		</v-row>
@@ -37,7 +32,8 @@ export default {
 	},
 	data(){
 		return{
-			isi: []
+			isi: [],
+			profile: []
 		}
 	},
 	mounted(){
@@ -45,16 +41,15 @@ export default {
 	},
 	methods: {
 		//async loadData(){
-		//	try {
-		//		const isi = await this.$axios.$get("donasi")
-		//		this.data.isi = isi.donasi
-		//		console.log("bisa cuy")
-		//	} catch (error){
-		//		if (error.response.status == 500) {
-		//			alert('Gagal Terhubung ke Server!')
-		//		}
-		//		console.log("metode cuy")
-		//	}
+		//	const profiles = await this.$axios.$get('auth/user')
+		//	this.profile = profiles
+		//	console.log(profiles)
+		//},
+
+		//async loadDataa(){
+		//	const profiles = await this.$axios.$get("auth/user" + this.isi.id)
+		//	this.profile = profiles
+		//	console.log(profiles)
 		//}
 	}
 }
