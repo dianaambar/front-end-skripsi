@@ -115,10 +115,10 @@ export default {
       selected: [],
       headers: [
         //{ text: 'Id', value: 'id' },
-        { text: "Jenis Makanan", value: "jenis_makanan" },
-        { text: "Tanggal Pengajuan", value: "tgl_pengajuan" },
-        { text: "Tanggal Kadaluwarsa", value: "tgl_kadaluwarsa" },
-        { text: "Lokasi Penjemputan", value: "lokasi_penjemputan" }
+        { text: "Alamat Penjemputan", value: "alamat_penjemputan" },
+        { text: "Waktu Penjemputan", value: "waktu_penjemputan" }
+        //{ text: "Tanggal Kadaluwarsa", value: "tgl_kadaluwarsa" },
+        //{ text: "Lokasi Penjemputan", value: "lokasi_penjemputan" }
         //{ text: 'Status Donasi', value: 'status_donasi' },
         //{ text: 'Jumlah Porsi', value: 'jumlah_porsi' },
         //{ text: 'Tanggal Produksi', value: 'tgl_produksi' },
