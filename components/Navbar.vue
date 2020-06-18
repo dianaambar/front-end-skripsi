@@ -15,21 +15,23 @@
             </v-list-item-avatar>
 
             <v-list-item-content class="subjudul">
-              <v-list-item-title>Garda Pangan</v-list-item-title>
-              <v-list-item-subtitle>gardapangan@gmail.com</v-list-item-subtitle>
+              <v-list-item-title>{{datauser.name}}</v-list-item-title>
+              <v-list-item-subtitle>{{datauser.email}}</v-list-item-subtitle>
+              <!--<v-list-item-subtitle>{{datauser.no_telp}}</v-list-item-subtitle>-->
             </v-list-item-content>
           </v-list-item>
 
           <v-divider></v-divider>
 
-          <v-list-item v-for="item in items" :key="item.title" link>
+          <v-list-item v-for="item in items" :key="item.title">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
-
-            <v-list-item-content class="subcontent">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
+            <nuxt-link class="link" :to="item.link">
+              <v-list-item-content class="subcontent">
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </nuxt-link>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -44,23 +46,42 @@ export default {
   data() {
     return {
       drawer: false,
+      datauser: "",
       items: [
-        { id: 1, title: "Donasi", icon: "mdi-home-city" },
-        { id: 2, title: "Relawan", icon: "mdi-home-city" }
+        {
+          id: 1,
+          title: "Donasi",
+          icon: "mdi-home-city",
+          link: "/komunitas/HalamanDonasi"
+        },
+        {
+          id: 2,
+          title: "Relawan",
+          icon: "mdi-home-city",
+          link: "/komunitas/Relawan"
+        }
       ],
       mini: true
     };
+  },
+
+  mounted() {
+    this.loadUser();
+  },
+  methods: {
+    async loadUser() {
+      const isi = await this.$axios.$get("getuser");
+      this.datauser = isi.user;
+      //console.log("bisa cuy")
+      console.log(isi);
+    }
   }
-  //  computed: mapGetters({
-  //    user: "auth/user"
-  //  })
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 .judul {
-  padding: 1rem;
 }
 
 .subjudul {
@@ -68,9 +89,12 @@ export default {
   font-family: "Rubik", sans-serif;
 }
 
+.link {
+  text-decoration: none;
+  color: white;
+}
 .subcontent {
   margin-left: 1rem;
-
   font-family: "Rubik", sans-serif;
 }
 </style>

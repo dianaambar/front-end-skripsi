@@ -90,15 +90,9 @@
             <!--</v-card>-->
           </td>
         </template>
-        <v-alert
-          slot="no-results"
-          :value="true"
-          color="error"
-          icon="warning"
-        >Your search for "{{ search }}" found no results.</v-alert>
+        <v-alert slot="no-results" :value="true">Your search for "{{ search }}" found no results.</v-alert>
       </v-data-table>
     </v-card>
-    <!--<app-donasi datadonasi="datadonasi"> </app-donasi>-->
   </div>
 </template>
 
@@ -115,15 +109,10 @@ export default {
       selected: [],
       headers: [
         //{ text: 'Id', value: 'id' },
+        { text: "Donatur", value: "name" },
         { text: "Alamat Penjemputan", value: "alamat_penjemputan" },
-        { text: "Waktu Penjemputan", value: "waktu_penjemputan" }
-        //{ text: "Tanggal Kadaluwarsa", value: "tgl_kadaluwarsa" },
-        //{ text: "Lokasi Penjemputan", value: "lokasi_penjemputan" }
-        //{ text: 'Status Donasi', value: 'status_donasi' },
-        //{ text: 'Jumlah Porsi', value: 'jumlah_porsi' },
-        //{ text: 'Tanggal Produksi', value: 'tgl_produksi' },
-        //{ text: 'Data Makanan', value: 'data_makanan' },
-        //{ text: 'Foto', value: 'foto_donasi' },
+        { text: "Waktu Penjemputan", value: "waktu_penjemputan" },
+        { text: "Status Donasi", value: "status" }
       ]
     };
   },
@@ -134,7 +123,6 @@ export default {
     async loadData() {
       const isis = await this.$axios.$get("donasikomunitas");
       this.datadonasi = isis.donasi;
-      //console.log("bisa cuy")
       //console.log(isis.donasi[0].nama_makanan)
     },
     //async updateDonasi(id){
@@ -157,7 +145,6 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
 .card-donasi {
-  margin: 1rem;
   font-family: "Rubik", sans-serif;
 }
 
