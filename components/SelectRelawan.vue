@@ -2,6 +2,7 @@
   <v-card class="card-select-relawan">
     <v-card-title>
       Pilih Relawan
+      <!--<div v-for="dr in datarelawan" :key="dr.id">{{dr.id}}</div>-->
       <v-spacer></v-spacer>
       <v-text-field label="Search" single-line hide-details v-model="search"></v-text-field>
     </v-card-title>
@@ -20,7 +21,7 @@
           <td>{{row.item.no_telp}}</td>
           <td>{{row.item.alamat}}</td>
           <td>
-            <v-btn color="green darken-3">Pilih</v-btn>
+            <v-btn @click="selectRelawan(row.item.id)" color="green darken-3">Pilih{{row.item.id}}</v-btn>
           </td>
         </tr>
       </template>
@@ -32,7 +33,7 @@
 <script>
 export default {
   name: "SelectRelawan",
-  props: ["datarelawan"],
+  props: ["datarelawan", "datadonasi"],
   data() {
     return {
       search: "",
@@ -55,7 +56,14 @@ export default {
       const isis = await this.$axios.$get("relawankomunitas");
       this.datarelawan = isis.relawan;
       //console.log("bisa cuy")
-      console.log(datarelawan[0].id);
+      //  console.log(datarelawan[0].id);
+    },
+    async selectRelawan(relawan_id) {
+      await this.$axios.$post("selectrelawan/" + this.datadonasi.id, {
+        relawan_id
+      });
+      console.log("ya");
+      window.location.reload(true);
     }
   }
 };

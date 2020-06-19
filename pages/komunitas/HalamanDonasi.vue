@@ -1,18 +1,18 @@
 <template>
   <div>
-    <v-app>
-      <Navbar />
-      <v-row>
-        <v-col cols="2"></v-col>
-        <v-col cols="10">
-          <v-row>
-            <TableDonasi />
-          </v-row>
-        </v-col>
-      </v-row>
-      <!--<p v-for="i in isi" :key="i.id">{{i.nama_makanan}}</p>-->
-      <!--<p>test</p>-->
-    </v-app>
+    <!--<v-app>-->
+    <Navbar />
+    <v-row>
+      <v-col cols="2"></v-col>
+      <v-col cols="10">
+        <v-row class="table-donasi">
+          <TableDonasi />
+        </v-row>
+      </v-col>
+    </v-row>
+    <!--<p v-for="i in isi" :key="i.id">{{i.nama_makanan}}</p>-->
+    <!--<p>test</p>-->
+    <!--</v-app>-->
   </div>
 </template>
 
@@ -55,4 +55,8 @@ export default {
 
 <style scoped>
 /*@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');*/
+
+.table-donasi {
+  width: 100rem;
+}
 </style>

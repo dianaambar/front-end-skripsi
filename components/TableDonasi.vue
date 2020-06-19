@@ -27,7 +27,6 @@
         :headers="headers"
         :items="datadonasi"
         :search="search"
-        show-expand
         @click:row="goToDonasi"
       >
         <template v-slot:item.tgl_pengajuan="{item}">
@@ -36,9 +35,9 @@
         <template v-slot:item.tgl_kadaluwarsa="{item}">
           <span>{{new Date(item.tgl_kadaluwarsa).toLocaleString()}}</span>
         </template>
-        <template #expanded-item="{datadonasi,item}">
+        <!--<template #expanded-item="{datadonasi,item}">
           <td :colspan="headers.length">
-            <!--<v-card class="card-table">-->
+            <v-card class="card-table">
             <v-row class="detail-donasi" align="center">
               <v-col cols="6">
                 <img class="img-makanan" :src="item.foto_donasi" />
@@ -87,9 +86,9 @@
                 <v-btn color="#C62828">Tolak</v-btn>
               </v-col>
             </v-row>
-            <!--</v-card>-->
+            </v-card>
           </td>
-        </template>
+        </template>-->
         <v-alert slot="no-results" :value="true">Your search for "{{ search }}" found no results.</v-alert>
       </v-data-table>
     </v-card>
@@ -128,11 +127,11 @@ export default {
     //async updateDonasi(id){
     //	await window.axios.post(`donasi/updateDonasi/${id}`);
     //}
-    async updateDonasi(id) {
-      await this.$axios.$post(`donasi/updateDonasi/${id}`);
-      console.log("method ini kepanggil");
-      window.location.reload(true);
-    },
+    //async updateDonasi(id) {
+    //  await this.$axios.$post(`donasi/updateDonasi/${id}`);
+    //  console.log("method ini kepanggil");
+    //  window.location.reload(true);
+    //},
 
     goToDonasi(item) {
       this.$router.push(`/komunitas/${item.id}`);
@@ -146,6 +145,8 @@ export default {
 
 .card-donasi {
   font-family: "Rubik", sans-serif;
+  width: 77rem;
+  align-self: center;
 }
 
 .img-makanan {
@@ -155,9 +156,6 @@ export default {
 
 .foto_relawan {
   max-width: 3rem;
-}
-
-.detail-donasi {
 }
 
 .txt-detail-donasi {

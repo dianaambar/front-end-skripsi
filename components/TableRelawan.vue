@@ -5,13 +5,7 @@
       <v-spacer></v-spacer>
       <v-text-field label="Search" single-line hide-details v-model="search"></v-text-field>
     </v-card-title>
-    <v-data-table
-      v-model="selected"
-      :headers="headers"
-      :items="datarelawan"
-      :search="search"
-      show-expand
-    >
+    <v-data-table v-model="selected" :headers="headers" :items="datarelawan" :search="search">
       <v-alert slot="no-results" :value="true">Your search for "{{ search }}" found no results.</v-alert>
     </v-data-table>
   </v-card>
