@@ -33,7 +33,7 @@
               </v-col>
             </v-row>
           </div>
-          <div v-if="datarelawan.length == 0 || datarelawan.length =='undefined'" class="bar">
+          <div v-if="status" class="bar">
             <!--<ProgressBar :datadonasi="datadonasi" :datarelawan="datarelawan" />-->
             <BarNoRelawan :datadonasi="datadonasi" :datarelawan="datarelawan" />
           </div>
@@ -42,7 +42,7 @@
             <!--<BarNoRelawan :datadonasi="datadonasi" :datarelawan="datarelawan" />-->
           </div>
         </v-card>
-        <div v-if="datarelawan != null">
+        <div v-if="datarelawan.length != 0">
           <div
             v-if="datadonasi.status == 'Donasi diterima, Mencari Relawan'"
             class="select-relawan"
@@ -90,7 +90,10 @@
             </v-card>
           </div>
         </div>
-        <div v-if="datadonasi.penerima_donasi != null">
+        <div v-if="datarelawan.length == 0">
+          <CardReportNonRelawan :datadonasi="datadonasi" :datarelawan="datarelawan" />
+        </div>
+        <div v-if="datadonasi.status == 'Donasi telah disalurkan'">
           <CardReport :datarelawan="datarelawan" :datadonasi="datadonasi" />
         </div>
       </v-col>
@@ -107,6 +110,7 @@ import CardReport from "@/components/CardReport";
 import TableRelawan from "@/components/TableRelawan";
 import SelectRelawan from "@/components/SelectRelawan";
 import BarNoRelawan from "@/components/progressNoRelawan";
+import CardReportNonRelawan from "@/components/CardReportNonRelawan";
 
 export default {
   components: {
@@ -116,7 +120,8 @@ export default {
     CardReport,
     TableRelawan,
     SelectRelawan,
-    BarNoRelawan
+    BarNoRelawan,
+    CardReportNonRelawan
   },
   data() {
     return {
@@ -157,6 +162,14 @@ export default {
     accept: function() {
       this.e1 = this.el > 2;
       //  this.datadonasi.accDonasi = true
+    }
+  },
+
+  computed: {
+    status() {
+      return (
+        this.datarelawan.length == 0 || this.datarelawan.length == "undefined"
+      );
     }
   }
 };

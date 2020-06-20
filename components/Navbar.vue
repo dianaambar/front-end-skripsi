@@ -23,7 +23,7 @@
 
           <v-divider></v-divider>
 
-          <v-list-item v-for="item in items" :key="item.title">
+          <!--<v-list-item v-for="item in items" :key="item.title">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -32,7 +32,31 @@
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item-content>
             </nuxt-link>
+          </v-list-item>-->
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>{{ iconDonasi }}</v-icon>
+            </v-list-item-icon>
+            <nuxt-link class="link" :to="linkDon">
+              <v-list-item-content class="subcontent">
+                <v-list-item-title>{{ tDon }}</v-list-item-title>
+              </v-list-item-content>
+            </nuxt-link>
           </v-list-item>
+
+          <div v-if="datarelawan.length != 0">
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>{{ iconRelawan }}</v-icon>
+              </v-list-item-icon>
+              <nuxt-link class="link" :to="linkRel">
+                <v-list-item-content class="subcontent">
+                  <v-list-item-title>{{ tRel }}</v-list-item-title>
+                </v-list-item-content>
+              </nuxt-link>
+            </v-list-item>
+          </div>
         </v-list>
       </v-navigation-drawer>
       <!--</v-card>-->
@@ -47,6 +71,12 @@ export default {
     return {
       drawer: false,
       datauser: "",
+      iconDonasi: "mdi-home-city",
+      iconRelawan: "mdi-home-city",
+      tDon: "Donasi",
+      tRel: "Relawan",
+      linkDon: "/komunitas/HalamanDonasi",
+      linkRel: "/komunitas/Relawan",
       items: [
         {
           id: 1,
@@ -61,12 +91,14 @@ export default {
           link: "/komunitas/Relawan"
         }
       ],
-      mini: true
+      mini: true,
+      datarelawan: ""
     };
   },
 
   mounted() {
     this.loadUser();
+    this.loadRelawan();
   },
   methods: {
     async loadUser() {
@@ -74,6 +106,13 @@ export default {
       this.datauser = isi.user;
       //console.log("bisa cuy")
       console.log(isi);
+    },
+    async loadRelawan() {
+      const isi = await this.$axios.$get("relawankomunitas");
+      this.datarelawan = isi.relawan;
+      console.log("bisa cuy");
+      //  console.log(this.datarelawan.length);
+      //  console.log(isi.relawan[0].id);
     }
   }
 };

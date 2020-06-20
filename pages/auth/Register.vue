@@ -45,14 +45,15 @@
     <v-card class="card-regis" @submit.prevent="register">
       <v-card-title>Register</v-card-title>
       <v-form>
-        <v-text-field v-model="form.name" label="Nama Komunitas" type="text"></v-text-field>
+        <v-text-field v-model="form.name" label="Nama Komunitas/Organisasi" type="text"></v-text-field>
         <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
         <v-text-field v-model="form.password" label="Password" type="password"></v-text-field>
         <v-text-field v-model="form.no_telp" label="No telp" type="text"></v-text-field>
         <v-text-field v-model="form.alamat" label="Alamat" type="text"></v-text-field>
         <v-text-field v-model="form.tgl_berdiri" label="Tanggal Berdiri" type="text"></v-text-field>
-        <v-text-field v-model="form.legalitas" label="Legalitas Komunitas" type="text"></v-text-field>
+        <v-text-field v-model="form.legalitas" label="Legalitas Komunitas/Organisasi" type="text"></v-text-field>
         <v-text-field v-model="form.foto_komunitas" label="Foto Komunitas" type="text"></v-text-field>
+        <!--<input type="file" label="Logo Komunitas/Organisasi" @change="onFilesSelected" />-->
         <div>
           <input type="submit" value="register" class="btn-regis" />
         </div>
@@ -73,7 +74,7 @@ export default {
         legalitas: "",
         tgl_berdiri: "",
         alamat: "",
-        foto_komunitas: ""
+        foto_komunitas: null
       }
     };
   },
@@ -82,6 +83,9 @@ export default {
       await this.$axios.$post("regiskomunitas", this.form);
 
       this.$router.push("/auth/Login");
+    },
+    onFilesSelected(event) {
+      this.foto_komunitas = event.target.files[0];
     }
   }
 
