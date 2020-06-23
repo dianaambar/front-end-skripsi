@@ -5,7 +5,9 @@
       <v-row align="center">
         <v-col class="text-center">
           <div class="my-2">
-            <v-btn x-large color="success" dark>Daftar Sebagai Relawan</v-btn>
+            <nuxt-link to="/auth/RegisterRelawan">
+              <v-btn x-large color="success" dark>Daftar Sebagai Relawan</v-btn>
+            </nuxt-link>
           </div>
         </v-col>
         <v-col class="tex-center">

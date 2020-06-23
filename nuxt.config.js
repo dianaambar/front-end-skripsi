@@ -46,7 +46,8 @@ module.exports = {
 			local: {
 				endpoints: {
 					login: { url: 'login', method: 'post', propertyName: 'access_token' },
-					user: { url: 'getuser', method: 'get', propertyName: 'user' }
+					user: { url: 'getuser', method: 'get', propertyName: 'user' },
+					//komunitas: { url: 'datakomunitas', method: 'get', propertyName: 'komunitas' }
 					//  logout: { url: 'auth/logout', method: 'post' },
 					//  refresh: { url: 'auth/refresh', method: 'get', propertyName: ''},
 				},

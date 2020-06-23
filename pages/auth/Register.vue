@@ -45,15 +45,19 @@
     <v-card class="card-regis" @submit.prevent="register">
       <v-card-title>Register</v-card-title>
       <v-form>
-        <v-text-field v-model="form.name" label="Nama Komunitas/Organisasi" type="text"></v-text-field>
+        <v-text-field v-model="form.name" label="Nama Komunitas/Organisasi Sosial" type="text"></v-text-field>
         <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
         <v-text-field v-model="form.password" label="Password" type="password"></v-text-field>
         <v-text-field v-model="form.no_telp" label="No telp" type="text"></v-text-field>
         <v-text-field v-model="form.alamat" label="Alamat" type="text"></v-text-field>
         <v-text-field v-model="form.tgl_berdiri" label="Tanggal Berdiri" type="text"></v-text-field>
-        <v-text-field v-model="form.legalitas" label="Legalitas Komunitas/Organisasi" type="text"></v-text-field>
-        <v-text-field v-model="form.foto_komunitas" label="Foto Komunitas" type="text"></v-text-field>
-        <!--<input type="file" label="Logo Komunitas/Organisasi" @change="onFilesSelected" />-->
+        <v-text-field v-model="form.legalitas" label="Legalitas Komunitas" type="text"></v-text-field>
+        <!--<v-text-field v-model="form.foto_komunitas" label="Foto Komunitas" type="text"></v-text-field>-->
+        <v-file-input
+          v-model="form.foto_komunitas"
+          show-size
+          label="Logo Komunitas/Organisasi Sosial"
+        ></v-file-input>
         <div>
           <input type="submit" value="register" class="btn-regis" />
         </div>
@@ -71,21 +75,37 @@ export default {
         email: "",
         password: "",
         no_telp: "",
+        alamat: "",
         legalitas: "",
         tgl_berdiri: "",
-        alamat: "",
-        foto_komunitas: null
+        foto_komunitas: ""
       }
     };
   },
   methods: {
     async register() {
-      await this.$axios.$post("regiskomunitas", this.form);
+      //  await this.$axios.$post("regiskomunitas", this.form);
+      let formData = new FormData();
+      formData.append("name", this.form.name);
+      formData.append("email", this.form.email);
+      formData.append("password", this.form.password);
+      formData.append("no_telp", this.form.no_telp);
+      formData.append("alamat", this.form.alamat);
+      formData.append("legalitas", this.form.legalitas);
+      formData.append("tgl_berdiri", this.form.tgl_berdiri);
+      formData.append("foto_komunitas", this.form.foto_komunitas);
+
+      let url = "regiskomunitas";
+
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+
+      await this.$axios.$post(url, formData, config);
 
       this.$router.push("/auth/Login");
-    },
-    onFilesSelected(event) {
-      this.foto_komunitas = event.target.files[0];
     }
   }
 

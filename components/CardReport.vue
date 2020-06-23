@@ -8,7 +8,7 @@
             width="250"
             height="250"
             class="img-donasi"
-            src="http://localhost:8000/images/pesantren.jpg"
+            :src="datadonasi.penerima_donasi.foto"
           />
         </v-col>
         <v-col cols="9">
@@ -68,7 +68,8 @@ export default {
       //  datarelawan: null,
       form: {
         nama_penerima: "Pesantren Darussalam",
-        alamat_penerima: "Jalan Raya Citayam Gang H.Dul"
+        alamat_penerima: "Jalan Raya Citayam Gang H.Dul",
+        src: "http://localhost:8000/images/pesantren.jpg"
       }
     };
   },

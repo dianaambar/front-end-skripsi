@@ -4,7 +4,7 @@
       <v-col cols="2">
         <div class="img-relawan">
           <v-avatar>
-            <img src="http://localhost:8000/images/supermarket.png" alt="Relawan" />
+            <img :src="datadonasi.foto" alt="Relawan" />
           </v-avatar>
         </div>
       </v-col>
@@ -21,7 +21,7 @@
           <p>Porsi = {{dm.jumlah}} {{dm.unit}}</p>
           <p>Tanggal Produksi = {{dm.tgl_produksi}}</p>
           <p>Perkiraan Kadaluwarsa = {{dm.tgl_kadaluwarsa}}</p>
-          <p>Notes = {{dm.notes}}</p>
+          <p>Notes = {{datadonasi.notes}}</p>
         </div>
       </v-col>
       <v-divider vertical></v-divider>

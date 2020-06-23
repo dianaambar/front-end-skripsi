@@ -12,7 +12,7 @@
             <v-row>
               <v-col cols="4">
                 <div class="img-makanan">
-                  <v-img height="250" width="250" src="https://cdn2.tstatic.net/default-2.jpg" />
+                  <v-img height="250" width="250" :src="datadonasi.foto" />
                 </div>
               </v-col>
               <v-col cols="8">

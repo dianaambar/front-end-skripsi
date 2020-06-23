@@ -16,7 +16,7 @@
         <div v-if="editing">
           <v-text-field v-model="namaValue" dense label="Nama Penerima"></v-text-field>
           <v-text-field v-model="alamatValue" dense label="Alamat"></v-text-field>
-          <v-text-field v-model="foto" dense label="foto"></v-text-field>
+          <v-file-input v-model="foto" show-size label="Foto Penerima Donasi"></v-file-input>
           <v-text-field v-model="latitude" dense label="Latitude"></v-text-field>
           <v-text-field v-model="longitude" dense label="Longitude"></v-text-field>
           <v-btn @click="saveEdit" color="grey darken-1">Simpan</v-btn>
@@ -63,10 +63,21 @@ export default {
   },
   methods: {
     async updatePenerima() {
-      await this.$axios.$post(
-        "updatepenerima/" + this.datadonasi.id,
-        this.form
-      );
+      let formData = new FormData();
+      formData.append("nama_penerima", this.form.nama_penerima);
+      formData.append("alamat_penerima", this.form.alamat_penerima);
+      formData.append("foto", this.form.foto);
+      formData.append("latitude", this.form.latitude);
+      formData.append("longitude", this.form.longitude);
+
+      let url = "updatepenerima/" + this.datadonasi.id;
+
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      await this.$axios.$post(url, formData, config);
       this.show = false;
       window.location.reload(true);
     },

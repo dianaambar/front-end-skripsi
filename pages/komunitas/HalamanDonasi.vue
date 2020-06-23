@@ -7,6 +7,7 @@
       <v-col cols="10">
         <v-row class="table-donasi">
           <TableDonasi />
+          <!--<TableDonasiSelesai />-->
         </v-row>
       </v-col>
     </v-row>
@@ -19,6 +20,7 @@
 <script>
 import TableDonasi from "@/components/TableDonasi";
 import TableDonasiAcc from "@/components/TableDonasiAcc";
+import TableDonasiSelesai from "@/components/TableDonasiSelesai";
 import Navbar from "@/components/Navbar";
 import TopNavv from "@/components/TopNavv";
 import axios from "axios";
@@ -27,7 +29,8 @@ export default {
     TableDonasi,
     Navbar,
     TopNavv,
-    TableDonasiAcc
+    TableDonasiAcc,
+    TableDonasiSelesai
   },
   data() {
     return {
