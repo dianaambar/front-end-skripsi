@@ -47,7 +47,21 @@ export default {
     async login() {
       await this.$auth.login({ data: this.form });
 
-      this.$router.push("/komunitas/HalamanDonasi");
+      console.log(this.$auth.user.role_id);
+      console.log(this.$auth.user.user.name);
+      if (this.$auth.user.role_id == 1) {
+        this.$router.push("/admin/Komunitas");
+      } else {
+        if (this.$auth.user.user.status !== true) {
+          //this.$router.push("/index");
+          alert("Akun Anda Belum Terverifikasi");
+        } else {
+          this.$router.push("/komunitas/HalamanDonasi");
+        }
+      }
+      //  console.log("apa?");
+
+      //  this.$router.push("/komunitas/HalamanDonasi");
     }
   }
 };

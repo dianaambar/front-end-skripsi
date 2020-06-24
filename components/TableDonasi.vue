@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const isis = await this.$axios.$get("donasikomunitas");
+      const isis = await this.$axios.$get("/donasikomunitas");
       this.datadonasi = isis.donasi;
       //console.log(isis.donasi[0].nama_makanan)
     },

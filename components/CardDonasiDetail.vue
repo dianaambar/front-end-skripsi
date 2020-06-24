@@ -4,7 +4,7 @@
       <v-col cols="2">
         <div class="img-relawan">
           <v-avatar>
-            <img :src="datadonasi.foto" alt="Relawan" />
+            <img src="http://localhost:8000/images/supermarket.png" alt="Relawan" />
           </v-avatar>
         </div>
       </v-col>
