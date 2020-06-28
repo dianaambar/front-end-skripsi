@@ -35,7 +35,7 @@ export default {
       const isis = await this.$axios.$get("relawankomunitas");
       this.datarelawan = isis.relawan;
       //console.log("bisa cuy")
-      console.log(isis);
+      //  console.log(isis);
     }
   }
 };

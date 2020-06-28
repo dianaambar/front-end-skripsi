@@ -21,7 +21,7 @@
           <td>{{row.item.no_telp}}</td>
           <td>{{row.item.alamat}}</td>
           <td>
-            <v-btn @click="selectRelawan(row.item.id)" color="green darken-3">Pilih{{row.item.id}}</v-btn>
+            <v-btn @click="selectRelawan(row.item.id)" color="green darken-3">Pilih</v-btn>
           </td>
         </tr>
       </template>
@@ -33,11 +33,11 @@
 <script>
 export default {
   name: "SelectRelawan",
-  props: ["datarelawan", "datadonasi"],
+  props: ["datadonasi"],
   data() {
     return {
       search: "",
-      //  datarelawan: [],
+      datarelawan: [],
       selected: [],
       headers: [
         { text: "Nama", value: "name" },
@@ -49,13 +49,19 @@ export default {
     };
   },
   mounted() {
-    //this.loadRelawan();
+    this.loadRelawan();
   },
   methods: {
     async loadRelawan() {
-      const isis = await this.$axios.$get("relawankomunitas");
-      this.datarelawan = isis.relawan;
-      //console.log("bisa cuy")
+      //  const isis = await this.$axios.$get("relawankomunitas");
+      const isi = await this.$axios.$get(
+        "/closestrelawan/" +
+          this.datadonasi.latitude +
+          "/" +
+          this.datadonasi.longitude
+      );
+      this.datarelawan = isi.relawan;
+      console.log(this.datarelawan);
       //  console.log(datarelawan[0].id);
     },
     async selectRelawan(relawan_id) {

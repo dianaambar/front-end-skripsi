@@ -106,8 +106,8 @@ export default {
       console.log(isi);
     },
     async loadRelawan() {
-      const isi = await this.$axios.$get("relawankomunitas");
-      this.datarelawan = isi.relawan;
+      const isi = await this.$axios.$get("/relawankomunitas");
+      this.datarelawan = isi.semua;
       console.log("bisa cuy");
       //  console.log(this.datarelawan.length);
       //  console.log(isi.relawan[0].id);

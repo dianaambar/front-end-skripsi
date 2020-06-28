@@ -146,7 +146,7 @@ export default {
       this.datadonasi = isis.donasi;
       this.datamakanan_donasi = isis.donasi.makanan_donasi;
       console.log(isis);
-      console.log(this.datamakanan_donasi);
+      console.log(this.datadonasi);
     },
     async loadRelawan() {
       const isi = await this.$axios.$get("relawankomunitas");

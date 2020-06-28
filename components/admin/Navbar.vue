@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       navbar: [
-        { icon: "", title: "Komunitas", link: "/admin/komunitas" },
+        { icon: "", title: "Komunitas", link: "/admin/Dashboard" },
         { icon: "", title: "Relawan", link: "" },
         { icon: "", title: "Donatur", link: "" },
         { icon: "", title: "Donasi", link: "" }
