@@ -50,7 +50,7 @@ export default {
       console.log(this.$auth.user.role_id);
       console.log(this.$auth.user.user.name);
       if (this.$auth.user.role_id == 1) {
-        this.$router.push("/admin/Komunitas");
+        this.$router.push("/admin/Dashboard");
       } else {
         if (this.$auth.user.user.status !== true) {
           //this.$router.push("/index");

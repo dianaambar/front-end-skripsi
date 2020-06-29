@@ -55,7 +55,22 @@
               </nuxt-link>
             </v-list-item>
           </div>
+
+          <!--<v-list-item @click="logout">
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content class="subcontent">
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>-->
         </v-list>
+
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn block @click="logout">Logout</v-btn>
+          </div>
+        </template>
       </v-navigation-drawer>
       <!--</v-card>-->
     </v-container>
@@ -111,6 +126,11 @@ export default {
       console.log("bisa cuy");
       //  console.log(this.datarelawan.length);
       //  console.log(isi.relawan[0].id);
+    },
+
+    async logout() {
+      const logout = await this.$axios.$post("/logout");
+      this.$router.push("/auth/Login");
     }
   }
 };
