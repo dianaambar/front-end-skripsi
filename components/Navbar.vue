@@ -9,7 +9,7 @@
         <v-list dense nav class="py-0">
           <v-list-item two-line>
             <v-list-item-avatar>
-              <img :src="datauser.foto_komunitas" />
+              <img :src="foto" />
             </v-list-item-avatar>
 
             <v-list-item-content class="subjudul">
@@ -105,7 +105,8 @@ export default {
         }
       ],
       mini: true,
-      datarelawan: ""
+      datarelawan: "",
+      foto: ""
     };
   },
 
@@ -117,6 +118,7 @@ export default {
     async loadUser() {
       const isi = await this.$axios.$get("datakomunitas");
       this.datauser = isi.komunitas;
+      this.foto = isi.komunitas.foto_komunitas;
       //console.log("bisa cuy")
       console.log(isi);
     },

@@ -1,5 +1,17 @@
 import colors from 'vuetify/es5/util/colors'
+//import Vue from 'vue'
+//import * as VueGoogleMaps from 'vue2-google-maps'
+//import * as VueGoogleMaps from '~/node_modules/vue2-google-maps'
+//import * as VueGoogleMaps from 'vue2-google-maps/dist/vue-google-maps-stubbed'
 require('dotenv').config()
+
+//Vue.use(VueGoogleMaps, {
+//	load: {
+//		key: 'AIzaSyDrHX3V2L-Ekb2z4MLRqXaW64CraG6RCrE',
+//		libraries: 'places'
+//	},
+//	installComponents: true
+//})
 
 module.exports = {
 	mode: 'universal',
@@ -38,7 +50,8 @@ module.exports = {
 	*/
 	plugins: [
 		'./plugins/mixins/validation',
-		'./plugins/axios'
+		'./plugins/axios',
+		//{ src: './plugins/vue2-google-maps.js', ssr: false }
 	],
 
 	auth: {
@@ -121,6 +134,8 @@ module.exports = {
 		** You can extend webpack config here
 		*/
 		extend(config, ctx) {
-		}
+			//transpile: [/^vue2-google-maps($|\/)/]
+		},
+		transpile: [/^vue2-google-maps($|\/)/]
 	}
 }

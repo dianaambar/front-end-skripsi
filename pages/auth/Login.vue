@@ -45,23 +45,27 @@ export default {
   },
   methods: {
     async login() {
-      await this.$auth.login({ data: this.form });
-
-      console.log(this.$auth.user.role_id);
-      console.log(this.$auth.user.user.name);
-      if (this.$auth.user.role_id == 1) {
-        this.$router.push("/admin/Dashboard");
+      if (this.form.email == "" || this.form.password == "") {
+        alert("Harap Lengkapi Isiannya");
       } else {
-        if (this.$auth.user.user.status !== true) {
-          //this.$router.push("/index");
-          alert("Akun Anda Belum Terverifikasi");
-        } else {
-          this.$router.push("/komunitas/HalamanDonasi");
-        }
-      }
-      //  console.log("apa?");
+        await this.$auth.login({ data: this.form });
 
-      //  this.$router.push("/komunitas/HalamanDonasi");
+        //  console.log(this.$auth.user.role_id);
+        //  console.log(this.$auth.user.user.name);
+        if (this.$auth.user.role_id == 1) {
+          this.$router.push("/admin/Dashboard");
+        } else {
+          if (this.$auth.user.user.status !== true) {
+            //this.$router.push("/index");
+            alert("Akun Anda Belum Terverifikasi");
+          } else {
+            this.$router.push("/komunitas/HalamanDonasi");
+          }
+        }
+        //  console.log("apa?");
+
+        //  this.$router.push("/komunitas/HalamanDonasi");
+      }
     }
   }
 };

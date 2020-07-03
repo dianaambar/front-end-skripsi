@@ -1,24 +1,29 @@
 <template>
   <div class="card-report">
     <v-row v-if="datadonasi.status == 'Donasi diterima, Mencari Relawan'">
-      <v-col cols="4">
+      <v-col cols="3">
         <!--<tr>-->
         <p>Nama Penerima :</p>
         <!--</tr>-->
         <!--<tr>-->
         <p>Alamat Penerima :</p>
         <p>Foto :</p>
-        <p>Latitude :</p>
-        <p>Longitude :</p>
+        <!--<p>Latitude :</p>
+        <p>Longitude :</p>-->
         <!--</tr>-->
       </v-col>
-      <v-col cols="8">
+      <v-col cols="9">
         <div v-if="editing">
           <v-text-field v-model="namaValue" dense label="Nama Penerima"></v-text-field>
-          <v-text-field v-model="alamatValue" dense label="Alamat"></v-text-field>
+          <v-row class="alamat">
+            <v-text-field v-model="alamatValue" dense label="Alamat"></v-text-field>
+            <nuxt-link to="/Map">
+              <v-btn>Lokasi</v-btn>
+            </nuxt-link>
+          </v-row>
           <v-file-input v-model="foto" show-size label="Foto Penerima Donasi"></v-file-input>
-          <v-text-field v-model="latitude" dense label="Latitude"></v-text-field>
-          <v-text-field v-model="longitude" dense label="Longitude"></v-text-field>
+          <!--<v-text-field v-model="latitude" dense label="Latitude"></v-text-field>
+          <v-text-field v-model="longitude" dense label="Longitude"></v-text-field>-->
           <v-btn @click="saveEdit" color="grey darken-1">Simpan</v-btn>
         </div>
         <div v-else>
@@ -56,8 +61,8 @@ export default {
         nama_penerima: "",
         alamat_penerima: "",
         foto: "",
-        latitude: "",
-        longitude: ""
+        latitude: "784758345",
+        longitude: "45254345"
       }
     };
   },
@@ -103,5 +108,9 @@ export default {
 .card-report {
   max-width: 50rem;
   margin: 2rem;
+}
+
+.alamat {
+  margin-left: 0.1rem;
 }
 </style>

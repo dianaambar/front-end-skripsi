@@ -10,7 +10,15 @@
       </v-col>
 
       <v-col cols="10">
-        <h4 class="nama-relawan">{{datadonasi.relawan_id}}</h4>
+        <h4 class="nama-relawan">{{datadonasi.alamat_penjemputan}}</h4>
+        <v-row>
+          <v-col>
+            <h5>Waktu Penjemputan :</h5>
+          </v-col>
+          <v-col>
+            <p>{{datadonasi.waktu_penjemputan}}</p>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
 
@@ -26,11 +34,41 @@
       </v-col>
       <v-divider vertical></v-divider>
       <v-col cols="6">
+        <!--{{dm.jamur}}-->
         <h4>Kondisi Makanan</h4>
-        <p>Berjamur = {{dm.jamur}}</p>
-        <p>Berwarna = {{dm.berwarna}}</p>
-        <p>Berubah Rasa = {{dm.berubahrasa}}</p>
-        <p>Berubah Tekstur = {{dm.berubahtekstur}}</p>
+        <div class="kondisi">
+          <div>
+            <v-row>
+              Berjamur =
+              <div v-if="dm.jamur == false">Tidak</div>
+              <div v-else>Ya</div>
+            </v-row>
+          </div>
+          <div>
+            <v-row>
+              Berwarna =
+              <div v-if="dm.berwarna == false">Tidak</div>
+              <div v-else>Ya</div>
+            </v-row>
+          </div>
+          <div>
+            <v-row>
+              Berubah Rasa =
+              <div v-if="dm.berubahrasa == false">Tidak</div>
+              <div v-else>Ya</div>
+            </v-row>
+          </div>
+          <div>
+            <v-row>
+              Berubah Tekstur =
+              <div v-if="dm.berubahtekstur == false">Tidak</div>
+              <div v-else>Ya</div>
+            </v-row>
+          </div>
+        </div>
+        <!--<p>Berwarna = {{kondisiWarna}}</p>
+        <p>Berubah Rasa = {{kondisiRasa}}</p>
+        <p>Berubah Tekstur = {{kondisiRekstur}}</p>-->
       </v-col>
     </v-row>
 
@@ -56,8 +94,33 @@ export default {
       satuan: "Kg",
       tgl_produksi: "2020-09-09",
       tgl_kadaluwarsa: "2020-09-09",
-      notes: "tolong cepat ya"
+      notes: "tolong cepat ya",
+      tidak: "tidak",
+      kondisi: "",
+      foto: ""
     };
+  },
+  computed: {
+    kondisiJamur() {
+      if (this.datamakanan_donasi.jamur == false) {
+        return "tidak";
+      }
+    },
+    kondisiWarna() {
+      if (this.datamakanan_donasi.berwarna == false) {
+        return "tidak";
+      }
+    },
+    kondisiRasa() {
+      if (this.datamakanan_donasi.berubahrasa == false) {
+        return "tidak";
+      }
+    },
+    kondisiRekstur() {
+      if (this.datamakanan_donasi.berubahtekstur == false) {
+        return "tidak";
+      }
+    }
   }
 };
 </script>
@@ -70,6 +133,10 @@ export default {
 }
 .detail-relawan {
   max-width: 20rem;
+}
+
+.kondisi {
+  margin-left: 0.5rem;
 }
 
 .nama-relawan {

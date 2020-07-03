@@ -12,7 +12,7 @@
             <v-row>
               <v-col cols="4">
                 <div class="img-makanan">
-                  <v-img height="250" width="250" :src="datadonasi.foto" />
+                  <v-img height="250" width="250" :src="fotoo" />
                 </div>
               </v-col>
               <v-col cols="8">
@@ -49,7 +49,7 @@
           >
             <SelectRelawan :datarelawan="datarelawan" :datadonasi="datadonasi" />
           </div>
-          <div class="card-relawan" v-if="datadonasi.relawan != null">
+          <div class="card-relawan" v-if="datadonasi.status =='Menunggu konfirmasi relawan'">
             <v-card class="rounded-xl">
               <div class="inside-card-relawan">
                 <h3>Relawan yang menjemput:</h3>
@@ -94,7 +94,11 @@
           <CardReportNonRelawan :datadonasi="datadonasi" :datarelawan="datarelawan" />
         </div>
         <div v-if="datadonasi.status == 'Donasi telah disalurkan'">
-          <CardReport :datarelawan="datarelawan" :datadonasi="datadonasi" />
+          <CardReport
+            :datarelawan="datarelawan"
+            :datadonasi="datadonasi"
+            :foto_penerima="foto_penerima"
+          />
         </div>
       </v-col>
     </v-row>
@@ -129,7 +133,9 @@ export default {
       datamakanan_donasi: "",
       e1: 1,
       datarelawan: [],
-      show: true
+      show: true,
+      fotoo: "",
+      foto_penerima: ""
     };
   },
   mounted() {
@@ -144,9 +150,15 @@ export default {
         "donasikomunitas/" + this.$route.params.id
       );
       this.datadonasi = isis.donasi;
+      //  this.foto_penerima =
+      //    "http://localhost:8000/images/" + isis.donasi.penerima_donasi.foto;
+      this.fotoo = "http://localhost:8000/images/" + isis.donasi.foto;
       this.datamakanan_donasi = isis.donasi.makanan_donasi;
-      console.log(isis);
-      console.log(this.datadonasi);
+      //  console.log(isis.donasi);
+      console.log(this.foto_penerima);
+      console.log("iyaa" + this.fotoo);
+      //  console.log(isis);
+      //  console.log(this.datadonasi);
     },
     async loadRelawan() {
       const isi = await this.$axios.$get("relawankomunitas");

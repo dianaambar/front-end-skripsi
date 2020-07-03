@@ -8,7 +8,7 @@
             width="250"
             height="250"
             class="img-donasi"
-            :src="datadonasi.penerima_donasi.foto"
+            :src="'http://localhost:8000/images/' + datadonasi.penerima_donasi.foto"
           />
         </v-col>
         <v-col cols="9">
@@ -58,13 +58,14 @@
 <script>
 export default {
   name: "CardReport",
-  props: ["datarelawan", "datadonasi"],
+  props: ["datarelawan", "datadonasi", "foto_penerima"],
   data() {
     return {
       btnChange: "Ubah Data",
       editing: true,
       namaValue: null,
       alamatValue: null,
+      foto: "",
       //  datarelawan: null,
       form: {
         nama_penerima: "Pesantren Darussalam",
@@ -84,6 +85,9 @@ export default {
       (this.editing = false),
         (this.form.nama_penerima = this.namaValue),
         (this.form.alamat_penerima = this.alamatValue);
+    },
+    async loadDataDonasi() {
+      const donasi = await this.$axios.$get();
     }
   }
 };
