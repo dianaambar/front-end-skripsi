@@ -12,7 +12,7 @@
             <v-img
               class="img-relawan"
               width="300px"
-              src="https://www.freeiconspng.com/uploads/no-image-icon-0.png"
+              :src="'http://localhost:8000/images/' + relawan.foto_relawan"
             />
           </v-col>
           <v-col cols="7">
@@ -54,8 +54,8 @@
         </v-row>
         <v-card-actions>
           <v-btn @click="dialog = false">Close</v-btn>
-          <v-btn color="red darken-4">Tolak</v-btn>
-          <v-btn @click="acceptRelawan(relawan.id)" color="green darken-3">Terima</v-btn>
+          <v-btn @click="ignoreRelawan(relawan.user_id)" color="red darken-4">Tolak</v-btn>
+          <v-btn @click="acceptRelawan(relawan.user_id)" color="green darken-3">Terima</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -74,7 +74,13 @@ export default {
   },
   methods: {
     async acceptRelawan(id) {
-      await this.$axios.$post("/acceptrelawan/" + this.relawan.id, {
+      await this.$axios.$post("/acceptrelawan/" + this.relawan.user_id, {
+        id
+      });
+      window.location.reload(true);
+    },
+    async ignoreRelawan(id) {
+      await this.$axios.$post("/ignorerelawan/" + this.relawan.user_id, {
         id
       });
       window.location.reload(true);

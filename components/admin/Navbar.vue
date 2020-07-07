@@ -4,12 +4,8 @@
       <v-navigation-drawer permanent absolute dark left="true">
         <v-list dense nav class="py-0">
           <v-list-item two-line>
-            <v-list-item-avatar>
-              <!--<img :src="datauser.foto_komunitas" />-->
-            </v-list-item-avatar>
-
             <v-list-item-content class="subjudul">
-              <v-list-item-title>Admin</v-list-item-title>
+              <v-list-item-title class="link">Admin</v-list-item-title>
               <!--<v-list-item-subtitle>{{datauser.no_telp}}</v-list-item-subtitle>-->
             </v-list-item-content>
           </v-list-item>
@@ -37,10 +33,14 @@ export default {
   data() {
     return {
       navbar: [
-        { icon: "", title: "Komunitas", link: "/admin/Dashboard" },
-        { icon: "", title: "Relawan", link: "" },
-        { icon: "", title: "Donatur", link: "" },
-        { icon: "", title: "Donasi", link: "" }
+        {
+          icon: "mdi-account-multiple",
+          title: "Komunitas",
+          link: "/admin/Dashboard"
+        },
+        { icon: "mdi-account-star", title: "Relawan", link: "" },
+        { icon: "mdi-comment-check-outline", title: "Donatur", link: "" },
+        { icon: "mdi-clipboard-text", title: "Donasi", link: "" }
       ]
     };
   }
@@ -48,4 +48,18 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+.link {
+  text-decoration: none;
+  color: white;
+}
+.subcontent {
+  margin-left: 1rem;
+  font-family: "Rubik", sans-serif;
+}
+
+.subjudul {
+  margin-left: 1rem;
+  font-family: "Rubik", sans-serif;
+}
 </style>

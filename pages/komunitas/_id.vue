@@ -150,8 +150,6 @@ export default {
         "donasikomunitas/" + this.$route.params.id
       );
       this.datadonasi = isis.donasi;
-      //  this.foto_penerima =
-      //    "http://localhost:8000/images/" + isis.donasi.penerima_donasi.foto;
       this.fotoo = "http://localhost:8000/images/" + isis.donasi.foto;
       this.datamakanan_donasi = isis.donasi.makanan_donasi;
       //  console.log(isis.donasi);

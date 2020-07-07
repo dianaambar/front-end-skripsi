@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-card class="card-login">
+      <v-card-title>Login</v-card-title>
       <!--{{errors}}-->
       <v-form @submit.prevent="login">
         <!--				
@@ -50,21 +51,15 @@ export default {
       } else {
         await this.$auth.login({ data: this.form });
 
-        //  console.log(this.$auth.user.role_id);
-        //  console.log(this.$auth.user.user.name);
         if (this.$auth.user.role_id == 1) {
           this.$router.push("/admin/Dashboard");
         } else {
-          if (this.$auth.user.user.status !== true) {
-            //this.$router.push("/index");
+          if (this.$auth.user.status !== true) {
             alert("Akun Anda Belum Terverifikasi");
           } else {
             this.$router.push("/komunitas/HalamanDonasi");
           }
         }
-        //  console.log("apa?");
-
-        //  this.$router.push("/komunitas/HalamanDonasi");
       }
     }
   }
@@ -79,10 +74,11 @@ export default {
   padding: 2rem;
   width: 30rem;
   font-family: "Rubik", sans-serif;
+  /*background-color: rgb(96, 240, 151);*/
 }
 
 .btn-login {
-  background-color: lightblue;
+  background-color: rgb(96, 240, 151);
   padding: 0.5rem;
   width: 10rem;
   border-radius: 1rem;

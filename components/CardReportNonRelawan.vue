@@ -72,10 +72,10 @@ export default {
       formData.append("nama_penerima", this.form.nama_penerima);
       formData.append("alamat_penerima", this.form.alamat_penerima);
       formData.append("foto", this.form.foto);
-      formData.append("latitude", this.form.latitude);
-      formData.append("longitude", this.form.longitude);
+      formData.append("latitude", "-7.84758345");
+      formData.append("longitude", "4.5254345");
 
-      let url = "updatepenerima/" + this.datadonasi.id;
+      let url = "updatenonrelawan/" + this.datadonasi.id;
 
       let config = {
         headers: {

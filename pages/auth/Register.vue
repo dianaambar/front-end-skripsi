@@ -43,7 +43,7 @@
 		</div>
     </v-form>-->
     <v-card class="card-regis" @submit.prevent="register">
-      <v-card-title>Register</v-card-title>
+      <v-card-title>Pendaftaran Komunitas/Organisasi</v-card-title>
       <v-form>
         <v-text-field v-model="form.name" label="Nama Komunitas/Organisasi Sosial" type="text"></v-text-field>
         <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>

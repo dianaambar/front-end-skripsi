@@ -8,11 +8,11 @@
         <!--<v-card>-->
         <h2>Biodata Diri</h2>
         <v-row>
-          <v-col class="5">
+          <v-col cols="5">
             <v-img
               class="img-relawan"
               width="300px"
-              src="https://www.freeiconspng.com/uploads/no-image-icon-0.png"
+              :src="'http://localhost:8000/images/' + relawan.foto_relawan"
             />
           </v-col>
           <v-col cols="7">
@@ -47,6 +47,8 @@
                 <p>{{relawan.organisasi_ongoing}}</p>
                 <p>{{relawan.jenis_sim}}</p>
                 <p>{{relawan.motivasi}}</p>
+
+                <v-btn @click="disableRelawan(relawan.user_id)" color="#C62828">Nonaktifkan Relawan</v-btn>
               </v-col>
             </v-row>
             <!--</v-card-text>-->
@@ -78,6 +80,13 @@ export default {
       );
       this.relawan = relawan.relawan;
       console.log(this.relawan);
+      console.log(this.relawan.user_id);
+    },
+    async disableRelawan(id) {
+      await this.$axios.$post("/disablerelawan/" + this.relawan.user_id, {
+        id
+      });
+      this.$router.push("/komunitas/Relawan");
     }
   }
 };

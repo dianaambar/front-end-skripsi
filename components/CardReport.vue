@@ -13,7 +13,7 @@
         </v-col>
         <v-col cols="9">
           <div>
-            <v-chip>
+            <v-chip @click="goToMap()">
               <v-icon left>mdi-map-marker</v-icon>
               {{datadonasi.penerima_donasi.nama_penerima}}
             </v-chip>
@@ -88,6 +88,9 @@ export default {
     },
     async loadDataDonasi() {
       const donasi = await this.$axios.$get();
+    },
+    goToMap() {
+      this.$router.push("/Map");
     }
   }
 };

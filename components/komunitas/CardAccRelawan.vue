@@ -6,7 +6,7 @@
           <v-img
             class="img-relawan"
             width="200"
-            src="https://www.freeiconspng.com/uploads/no-image-icon-0.png"
+            :src="'http://localhost:8000/images/' + relawan.foto_relawan"
           />
         </v-col>
         <v-col cols="9">
