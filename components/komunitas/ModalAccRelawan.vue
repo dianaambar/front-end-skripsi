@@ -52,6 +52,7 @@
             </v-card-text>
           </v-col>
         </v-row>
+        <v-btn color="#BBDEFB">Kirim Email</v-btn>
         <v-card-actions>
           <v-btn @click="dialog = false">Close</v-btn>
           <v-btn @click="ignoreRelawan(relawan.user_id)" color="red darken-4">Tolak</v-btn>
