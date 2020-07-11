@@ -3,8 +3,16 @@
     <v-card class="card-regis" @submit.prevent="register">
       <v-card-title>Daftar Sebagai Relawan</v-card-title>
       <v-form>
-        <v-select v-model="select" :items="komunitas" label="Pilih Komunitas"></v-select>
+        <v-select
+          v-model="form.komunitas_id"
+          item-text="name"
+          item-value="id"
+          :items="komunitas"
+          label="Pilih Komunitas"
+        ></v-select>
         <v-text-field v-model="form.name" label="Nama" type="text"></v-text-field>
+
+        <v-text-field v-model="form.nama_panggilan" label="Nama Panggilan" type="text"></v-text-field>
 
         <v-text-field v-model="form.email" label="Email" type="email"></v-text-field>
 
@@ -14,11 +22,14 @@
 
         <v-text-field v-model="form.alamat" label="Alamat" type="text"></v-text-field>
 
-        <v-text-field v-model="form.jenis_kelamin" label="Jenis Kelamin" type="text"></v-text-field>
+        <!--<v-text-field v-model="form.jenis_kelamin" label="Jenis Kelamin" type="text"></v-text-field>-->
+        <v-select v-model="form.jenis_kelamin" :items="jns_kel" label="Pilih Jenis Kelamin"></v-select>
 
-        <v-text-field v-model="form.agama" label="Agama" type="text"></v-text-field>
+        <!--<v-text-field v-model="form.agama" label="Agama" type="text"></v-text-field>-->
+        <v-select v-model="form.agama" :items="agm" label="Pilih Agama"></v-select>
 
-        <v-text-field v-model="form.gol_darah" label="Golongan Darah" type="text"></v-text-field>
+        <!--<v-text-field v-model="form.gol_darah" label="Golongan Darah" type="text"></v-text-field>-->
+        <v-select v-model="form.gol_darah" :items="goldar" label="Pilih Golongan Darah"></v-select>
 
         <v-text-field v-model="form.kabupaten_kota" label="Kabupaten/Kota" type="text"></v-text-field>
 
@@ -54,12 +65,17 @@
 export default {
   data() {
     return {
+      jns_kel: ["Laki-laki", "Perempuan"],
+      agm: ["Islam", "Kristen", "Katolik", "Hindu", "Budha", "Konghuchu"],
+      goldar: ["O", "A", "B", "AB"],
       form: {
+        komunitas_id: "",
         name: "",
         email: "",
         password: "",
         no_telp: "",
         alamat: "",
+        nama_panggilan: "",
         jenis_kelamin: "",
         agama: "",
         gol_darah: "",
@@ -75,7 +91,13 @@ export default {
         motivasi: ""
       },
       select: "",
-      komunitas: ["Foodcycle of Indonesia", "Foodbank of Indonesia"]
+      komunitas: [
+        {
+          nama: "",
+          id: ""
+        }
+      ]
+      //  komunitas: ["Foodcycle of Indonesia", "Foodbank of Indonesia"]
     };
   },
   mounted() {
@@ -84,7 +106,9 @@ export default {
   methods: {
     async register() {
       let formData = new FormData();
+      formData.append("komunitas_id", this.form.komunitas_id);
       formData.append("name", this.form.name);
+      formData.append("nama_panggilan", this.form.nama_panggilan);
       formData.append("email", this.form.email);
       formData.append("password", this.form.password);
       formData.append("no_telp", this.form.no_telp);
@@ -110,19 +134,19 @@ export default {
       };
       await this.$axios.$post(url, formData, config);
       alert(
-        "Terima Kasih Sudah Mendaftar, Tunggu Verifikasi dari Pihak Komunitas"
+        "Terima Kasih Sudah Mendaftar, Mohon Tunggu Verifikasi dari Pihak Komunitas"
       );
       this.$router.push("/");
     },
     async loadKomunitas() {
-      const komunitas = await this.$axios.get("/komunitas");
-      //  this.komunitas = komunitas.data.namakomunitas;
+      const komunitas = await this.$axios.get("/acceptedkomunitas");
+      this.komunitas = komunitas.data.komunitas;
+      //  this.komunitas.nama = komunitas.data.komunitas[0].name;
       console.log(this.komunitas);
     }
   }
 };
 </script>
-
 <style scoped>
 .card-regis {
   margin-top: 10rem;

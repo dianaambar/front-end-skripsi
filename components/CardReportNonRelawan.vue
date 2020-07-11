@@ -14,17 +14,31 @@
       </v-col>
       <v-col cols="9">
         <div v-if="editing">
-          <v-text-field v-model="namaValue" dense label="Nama Penerima"></v-text-field>
+          <v-text-field v-model="form.nama_penerima" dense label="Nama Penerima"></v-text-field>
           <v-row class="alamat">
-            <v-text-field v-model="alamatValue" dense label="Alamat"></v-text-field>
-            <nuxt-link to="/Map">
-              <v-btn>Lokasi</v-btn>
-            </nuxt-link>
+            <v-text-field v-model="form.alamat_penerima" dense label="Alamat"></v-text-field>
+
+            <v-btn @click="showMap = !showMap">Lokasi</v-btn>
+
+            <div v-if="showMap == true">
+              <gmap-map :center="center" :zoom="zoom" style="width: 500px; height: 500px">
+                <gmap-marker
+                  :key="index"
+                  v-for="(m, index) in markers"
+                  :position="m.position"
+                  :clickable="true"
+                  :draggable="true"
+                  @click="markerClick(m.position)"
+                  @dragend="showLocation"
+                />
+              </gmap-map>
+              <v-btn @click="setLocation">Pilih Lokasi</v-btn>
+            </div>
           </v-row>
-          <v-file-input v-model="foto" show-size label="Foto Penerima Donasi"></v-file-input>
+          <v-file-input v-model="form.foto" show-size label="Foto Penerima Donasi"></v-file-input>
           <!--<v-text-field v-model="latitude" dense label="Latitude"></v-text-field>
           <v-text-field v-model="longitude" dense label="Longitude"></v-text-field>-->
-          <v-btn @click="saveEdit" color="grey darken-1">Simpan</v-btn>
+          <v-btn @click="saveEdit" color="grey darken-1">Simpan{{form.latitude}}</v-btn>
         </div>
         <div v-else>
           <p>{{form.nama_penerima}}</p>
@@ -45,35 +59,70 @@
 </template>
 
 <script>
+import Vue from "vue";
+import * as VueGoogleMaps from "vue2-google-maps";
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyCwS9F0LOFfK745jhXuxLSs51tzm7Yb9ZU",
+    // process.env.NUXT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: "places"
+  }
+});
+
 export default {
   name: "CardReportNonRelawan",
   props: ["datarelawan", "datadonasi"],
   data() {
     return {
+      showMap: false,
       editing: true,
       namaValue: null,
       alamatValue: null,
       foto: null,
       show: false,
-      latitude: null,
-      longitude: null,
       form: {
         nama_penerima: "",
         alamat_penerima: "",
         foto: "",
         latitude: "784758345",
         longitude: "45254345"
-      }
+      },
+      posisi: "",
+      center: {
+        lat: -6.439244,
+        lng: 106.805435
+      },
+      zoom: 15,
+      markers: [
+        {
+          position: {
+            lat: -6.439244,
+            lng: 106.805435
+          }
+        }
+      ],
+      latitude: "",
+      longitude: "",
+      lati: "",
+      longit: ""
     };
   },
+  //  created(){
+  //	  bus.$on('location', updateLoc)
+  //  },
   methods: {
     async updatePenerima() {
+      //  await this.$axios.$post(
+      //    "updatenonrelawan/" + this.datadonasi.id,
+      //    this.form
+      //  );
       let formData = new FormData();
       formData.append("nama_penerima", this.form.nama_penerima);
       formData.append("alamat_penerima", this.form.alamat_penerima);
       formData.append("foto", this.form.foto);
-      formData.append("latitude", "-7.84758345");
-      formData.append("longitude", "4.5254345");
+      formData.append("latitude", this.form.latitude);
+      formData.append("longitude", this.form.longitude);
 
       let url = "updatenonrelawan/" + this.datadonasi.id;
 
@@ -99,7 +148,42 @@ export default {
       this.form.foto = this.foto;
       this.form.latitude = this.latitude;
       this.form.longitude = this.longitude;
+    },
+    markerClick: function(position) {
+      console.log(JSON.stringify(position));
+    },
+    showLocation: function(evt) {
+      //  console.log(evt.latLng.toString());
+      this.posisi = evt.latLng.toString();
+      //  console.log(this.posisi);
+      var pos = this.posisi;
+      var loc = pos.split(",");
+
+      var lat = loc[0];
+      var splitLat = lat.split("(");
+      this.lati = splitLat[1];
+      //  console.log(this.lati);
+
+      var lng = loc[1];
+      var splitLng = lng.split(")");
+      //  console.log(splitLng[0]);
+      var longi = splitLng[0];
+      var splitLongi = longi.split(" ");
+      //  console.log(splitLongi[1]);
+      this.longit = splitLongi[1];
+      //  console.log(this.longit);
+    },
+    setLocation() {
+      this.form.latitude = this.lati;
+      console.log(this.form.latitude);
+      this.form.longitude = this.longit;
+      console.log(this.form.longitude);
     }
+    //updateLoc: function() {
+    //  this.$root.$on("location", lat => {
+    //    this.form.latitude = lat;
+    //  });
+    //}
   }
 };
 </script>

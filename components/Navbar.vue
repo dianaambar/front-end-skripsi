@@ -9,7 +9,7 @@
         <v-list dense nav class="py-0">
           <v-list-item two-line>
             <v-list-item-avatar>
-              <img :src="foto" />
+              <img :src="'http://localhost:8000/images/' + foto" />
             </v-list-item-avatar>
 
             <v-list-item-content class="subjudul">

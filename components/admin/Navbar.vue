@@ -23,6 +23,11 @@
             </nuxt-link>
           </v-list-item>
         </v-list>
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn block @click="logout">Logout</v-btn>
+          </div>
+        </template>
       </v-navigation-drawer>
     </v-container>
   </div>
@@ -38,11 +43,21 @@ export default {
           title: "Komunitas",
           link: "/admin/Dashboard"
         },
-        { icon: "mdi-account-star", title: "Relawan", link: "" },
         { icon: "mdi-comment-check-outline", title: "Donatur", link: "" },
-        { icon: "mdi-clipboard-text", title: "Donasi", link: "" }
+        { icon: "mdi-clipboard-text", title: "Donasi", link: "" },
+        {
+          icon: "mdi-account-plus",
+          title: "Pendaftaran",
+          link: "/admin/PendaftaranKomunitas"
+        }
       ]
     };
+  },
+  methods: {
+    async logout() {
+      const logout = await this.$axios.$post("/logout");
+      this.$router.push("/auth/Login");
+    }
   }
 };
 </script>

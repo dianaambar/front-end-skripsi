@@ -26,7 +26,7 @@
                       <v-btn @click="updateDonasi" color="green darken-3">Terima</v-btn>
                     </v-col>
                     <v-col>
-                      <v-btn color="red darken-4">Tolak</v-btn>
+                      <v-btn @click="ignoreDonasi" color="red darken-4">Tolak</v-btn>
                     </v-col>
                   </v-row>
                 </div>
@@ -168,6 +168,10 @@ export default {
     async updateDonasi() {
       await this.$axios.$put("updatedonasi/" + this.$route.params.id);
       window.location.reload(true);
+    },
+    async ignoreDonasi() {
+      await this.$axios.$post("deleteDonasi/" + this.$route.params.id);
+      this.$router.push("/komunitas/HalamanDonasi");
     },
     accept: function() {
       this.e1 = this.el > 2;
