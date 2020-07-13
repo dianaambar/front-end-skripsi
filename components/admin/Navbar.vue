@@ -43,13 +43,14 @@ export default {
           title: "Komunitas",
           link: "/admin/Dashboard"
         },
-        { icon: "mdi-comment-check-outline", title: "Donatur", link: "" },
-        { icon: "mdi-clipboard-text", title: "Donasi", link: "" },
+        { icon: "mdi-comment-check-outline", title: "Donatur", link: "/admin/Donatur" },
+        { icon: "mdi-clipboard-text", title: "Donasi", link: "/admin/Donasi" },
         {
           icon: "mdi-account-plus",
           title: "Pendaftaran",
           link: "/admin/PendaftaranKomunitas"
-        }
+        },
+        //  { icon: "mdi-clipboard-text", title: "Donasi", link: "" },
       ]
     };
   },
